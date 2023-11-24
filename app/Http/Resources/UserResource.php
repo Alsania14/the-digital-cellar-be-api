@@ -12,7 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *            property="id",
  *            description="user unique id / primary key",
  *            type="number",
- *            nullable="false",
+ *            nullable="true",
  *            example=1,
  *        ),
  *        @OA\Property(
@@ -30,17 +30,24 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *            example="kellen.boyer@example.com"
  *        ),
  *        @OA\Property(
+ *            property="password",
+ *            description="User password, will be hashed",
+ *            type="string",
+ *            nullable="false",
+ *            example="password"
+ *        ),
+ *        @OA\Property(
  *            property="created_at",
  *            description="User created at",
  *            type="string",
- *            nullable="false",
+ *            nullable="true",
  *            example="2023-11-24T01:10:37.000000Z"
  *        ),
  *        @OA\Property(
  *            property="updated_at",
  *            description="User updated at",
  *            type="string",
- *            nullable="false",
+ *            nullable="true",
  *            example="2023-11-24T01:10:37.000000Z"
  *        ),
  *    )

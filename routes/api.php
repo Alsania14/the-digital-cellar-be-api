@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/users', [\App\Http\Controllers\UserController::class, 'index']);
+    Route::post('/user', [\App\Http\Controllers\UserController::class, 'store']);
+    Route::patch('/{id_user}/user', [\App\Http\Controllers\UserController::class, 'update']);
 });

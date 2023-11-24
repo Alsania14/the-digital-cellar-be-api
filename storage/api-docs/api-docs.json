@@ -46,6 +46,98 @@
                     }
                 }
             }
+        },
+        "/api/v1/user": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Post new user",
+                "description": "Post new user with name and email, created_at and updated_at is nullable",
+                "operationId": "postUser",
+                "requestBody": {
+                    "request": "UserStoreRequestBody",
+                    "description": "Post new user object to the system",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/UserResource"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/{id_user}/user": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Patch user with partial user data",
+                "description": "Patch with partial user data",
+                "operationId": "patchUser",
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "path",
+                        "description": "Target user id",
+                        "required": false
+                    }
+                ],
+                "requestBody": {
+                    "request": "UserUpdateRequestBody",
+                    "description": "Patch user object to the system",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/UserResource"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -133,7 +225,7 @@
                         "description": "user unique id / primary key",
                         "type": "number",
                         "example": 1,
-                        "nullable": "false"
+                        "nullable": "true"
                     },
                     "name": {
                         "description": "User name",
@@ -147,17 +239,23 @@
                         "example": "kellen.boyer@example.com",
                         "nullable": "false"
                     },
+                    "password": {
+                        "description": "User password, will be hashed",
+                        "type": "string",
+                        "example": "password",
+                        "nullable": "false"
+                    },
                     "created_at": {
                         "description": "User created at",
                         "type": "string",
                         "example": "2023-11-24T01:10:37.000000Z",
-                        "nullable": "false"
+                        "nullable": "true"
                     },
                     "updated_at": {
                         "description": "User updated at",
                         "type": "string",
                         "example": "2023-11-24T01:10:37.000000Z",
-                        "nullable": "false"
+                        "nullable": "true"
                     }
                 },
                 "type": "object"

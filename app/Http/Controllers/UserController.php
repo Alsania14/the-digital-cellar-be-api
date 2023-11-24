@@ -30,7 +30,7 @@ class UserController extends Controller
      *         description="per_page, default value is ten",
      *         required=false,
      *      ),
-     * *    @OA\Parameter(
+     *      @OA\Parameter(
      *         name="search",
      *         in="query",
      *         description="global filter users, with name and email",
@@ -56,7 +56,32 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="/api/v1/user",
+     *      operationId="postUser",
+     *      tags={"Users"},
+     *      summary="Post new user",
+     *      description="Post new user with name and email, created_at and updated_at is nullable",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *            allOf={
+     *              @OA\Schema(ref="#/components/schemas/UserResource"),
+     *            },
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          request="UserStoreRequestBody",
+     *          description="Post new user object to the system",
+     *          required=true,
+     *          @OA\JsonContent(
+     *            allOf={
+     *              @OA\Schema(ref="#/components/schemas/UserResource"),
+     *            },
+     *          )
+     *       )
+     * )
      */
     public function store(StoreUserRequest $request)
     {
@@ -74,11 +99,43 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Patch(
+     *      path="/api/v1/{id_user}/user",
+     *      operationId="patchUser",
+     *      tags={"Users"},
+     *      summary="Patch user with partial user data",
+     *      description="Patch with partial user data",
+     *      @OA\Parameter(
+     *         name="id_user",
+     *         in="path",
+     *         description="Target user id",
+     *         required=false,
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *            allOf={
+     *              @OA\Schema(ref="#/components/schemas/UserResource"),
+     *            },
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          request="UserUpdateRequestBody",
+     *          description="Patch user object to the system",
+     *          required=true,
+     *          @OA\JsonContent(
+     *            allOf={
+     *              @OA\Schema(ref="#/components/schemas/UserResource"),
+     *            },
+     *          )
+     *       )
+     * )
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $user = User::findOrFail($id)->update($request->all());
+        User::findOrFail($id)->update($request->all());
+        $user = User::findOrFail($id);
         return new UserResource($user);
     }
 
