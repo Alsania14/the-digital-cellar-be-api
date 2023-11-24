@@ -66,9 +66,14 @@ class UserController extends Controller
      *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
-     *            allOf={
-     *              @OA\Schema(ref="#/components/schemas/UserResource"),
-     *            },
+     *            @OA\Property(
+     *              property="data",
+     *              type="object",
+     *              nullable="true",
+     *              allOf={
+     *                @OA\Schema(ref="#/components/schemas/UserResource"),
+     *              },
+     *            ),
      *          )
      *      ),
      *      @OA\RequestBody(
@@ -115,9 +120,14 @@ class UserController extends Controller
      *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
-     *            allOf={
-     *              @OA\Schema(ref="#/components/schemas/UserResource"),
-     *            },
+     *            @OA\Property(
+     *              property="data",
+     *              type="object",
+     *              nullable="true",
+     *              allOf={
+     *                @OA\Schema(ref="#/components/schemas/UserResource"),
+     *              },
+     *            ),
      *          )
      *      ),
      *      @OA\RequestBody(

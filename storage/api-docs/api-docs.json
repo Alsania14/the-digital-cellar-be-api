@@ -77,11 +77,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/components/schemas/UserResource"
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": "true",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/UserResource"
+                                                }
+                                            ]
                                         }
-                                    ]
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -127,11 +134,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/components/schemas/UserResource"
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": "true",
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/UserResource"
+                                                }
+                                            ]
                                         }
-                                    ]
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
