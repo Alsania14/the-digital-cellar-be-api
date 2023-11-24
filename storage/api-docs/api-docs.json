@@ -1,0 +1,167 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "The Digital Cellar API",
+        "version": "1"
+    },
+    "paths": {
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Simple Pagination Laravel of data Users",
+                "description": "Returns list of simple pagination Laravel Users",
+                "operationId": "getUsersList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Target page, default value is one",
+                        "required": false
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "per_page, default value is ten",
+                        "required": false
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "global filter users, with name and email",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserCollection": {
+                "properties": {
+                    "data": {
+                        "description": "User details",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserResource"
+                        },
+                        "nullable": false
+                    },
+                    "links": {
+                        "description": "User details",
+                        "properties": {
+                            "links": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/users?page=1",
+                                "nullable": false
+                            },
+                            "last": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": false
+                            },
+                            "next": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": false
+                            },
+                            "prev": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": false
+                            }
+                        },
+                        "type": "object",
+                        "nullable": false
+                    },
+                    "meta": {
+                        "description": "User details",
+                        "properties": {
+                            "links": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/users?page=1",
+                                "nullable": false
+                            },
+                            "current_page": {
+                                "type": "number",
+                                "example": 1,
+                                "nullable": false
+                            },
+                            "from": {
+                                "type": "number",
+                                "example": 1,
+                                "nullable": false
+                            },
+                            "path": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/users",
+                                "nullable": false
+                            },
+                            "per_page": {
+                                "type": "number",
+                                "example": 10,
+                                "nullable": false
+                            },
+                            "to": {
+                                "type": "number",
+                                "example": 2,
+                                "nullable": false
+                            }
+                        },
+                        "type": "object",
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "properties": {
+                    "id": {
+                        "description": "user unique id / primary key",
+                        "type": "number",
+                        "example": 1,
+                        "nullable": "false"
+                    },
+                    "name": {
+                        "description": "User name",
+                        "type": "string",
+                        "example": "Kellen Boyer",
+                        "nullable": "false"
+                    },
+                    "email": {
+                        "description": "User E-mail",
+                        "type": "string",
+                        "example": "kellen.boyer@example.com",
+                        "nullable": "false"
+                    },
+                    "created_at": {
+                        "description": "User created at",
+                        "type": "string",
+                        "example": "2023-11-24T01:10:37.000000Z",
+                        "nullable": "false"
+                    },
+                    "updated_at": {
+                        "description": "User updated at",
+                        "type": "string",
+                        "example": "2023-11-24T01:10:37.000000Z",
+                        "nullable": "false"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
