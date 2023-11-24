@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
      * @OA\Get(
      *      path="/api/v1/users",
-     *      operationId="getUsersList",
+     *      operationId="getUsers",
      *      tags={"Users"},
      *      summary="Get Simple Pagination Laravel of data Users",
      *      description="Returns list of simple pagination Laravel Users",
@@ -95,7 +95,33 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/api/v1/{id_user}/user",
+     *      operationId="getUser",
+     *      tags={"Users"},
+     *      summary="Get user with partial user data",
+     *      description="Get with partial user data",
+     *      @OA\Parameter(
+     *         name="id_user",
+     *         in="path",
+     *         description="Target user id",
+     *         required=false,
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *            @OA\Property(
+     *              property="data",
+     *              type="object",
+     *              nullable="true",
+     *              allOf={
+     *                @OA\Schema(ref="#/components/schemas/UserResource"),
+     *              },
+     *            ),
+     *          )
+     *      ),
+     * )
      */
     public function show(string $id)
     {
@@ -150,11 +176,35 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *      path="/api/v1/{id_user}/user",
+     *      operationId="deleteUser",
+     *      tags={"Users"},
+     *      summary="Delete user",
+     *      description="Permanently delete user",
+     *      @OA\Parameter(
+     *         name="id_user",
+     *         in="path",
+     *         description="Target user id",
+     *         required=false,
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *            @OA\Property(
+     *              property="data",
+     *              type="boolean",
+     *              nullable="true",
+     *              example=true,
+     *            ),
+     *          )
+     *      )
+     * )
      */
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id)->delete();
-        return new UserResource($user);
+        $isSuccess = User::findOrFail($id)->delete();
+        return $isSuccess === 1;
     }
 }
