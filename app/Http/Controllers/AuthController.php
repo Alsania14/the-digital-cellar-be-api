@@ -9,14 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-/**
- * @OA\SecurityScheme(
- *     securityScheme="bearerAuth",
- *     type="http",
- *     scheme="bearer",
- *     bearerFormat="JWT",
- * )
- */
 class AuthController extends Controller
 {
     /**
@@ -44,12 +36,14 @@ class AuthController extends Controller
      *              @OA\Property(
      *                  type="string",
      *                  description="user email",
-     *                  property="email"
+     *                  property="email",
+     *                  example="admin@gmail.com"
      *              ),
      *              @OA\Property(
      *                  type="string",
      *                  description="user password",
-     *                  property="password"
+     *                  property="password",
+     *                  example="password"
      *              )
      *          )
      *       )
@@ -87,16 +81,12 @@ class AuthController extends Controller
      */
     public function signOut(Request $request)
     {
-        return Auth::guard('sanctum')?->user();
-        // try {
-        //     $tokens = $request?->user()?->tokens ? $request?->user()?->tokens : [];
-        //     foreach ($tokens as $token) {
-        //         $token->delete();
-        //     }
-        // } finally {
-        //     return response()->json([
-        //         'message' => 'logout success'
-        //     ]);
-        // }
+        $tokens = $request?->user()?->tokens ? $request?->user()?->tokens : [];
+        foreach ($tokens as $token) {
+            $token->delete();
+        }
+        return response()->json([
+            'message' => 'logout success'
+        ]);
     }
 }

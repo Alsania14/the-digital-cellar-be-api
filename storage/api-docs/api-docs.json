@@ -21,11 +21,13 @@
                                 "properties": {
                                     "email": {
                                         "description": "user email",
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "admin@gmail.com"
                                     },
                                     "password": {
                                         "description": "user password",
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"
@@ -439,11 +441,6 @@
             }
         },
         "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "bearerFormat": "JWT",
-                "scheme": "bearer"
-            },
             "sanctum": {
                 "type": "apiKey",
                 "description": "Enter token in format (Bearer <token>)",
