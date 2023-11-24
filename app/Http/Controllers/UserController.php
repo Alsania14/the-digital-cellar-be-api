@@ -8,7 +8,16 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ * )
+ */
 class UserController extends Controller
 {
     /**
@@ -16,6 +25,7 @@ class UserController extends Controller
      *      path="/api/v1/users",
      *      operationId="getUsers",
      *      tags={"Users"},
+     *      security={ {"sanctum": {} }},
      *      summary="Get Simple Pagination Laravel of data Users",
      *      description="Returns list of simple pagination Laravel Users",
      *      @OA\Parameter(
@@ -57,10 +67,11 @@ class UserController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/v1/user",
+     *      path="/api/v1/users",
      *      operationId="postUser",
      *      tags={"Users"},
      *      summary="Post new user",
+     *      security={ {"sanctum": {} }},
      *      description="Post new user with name and email, created_at and updated_at is nullable",
      *      @OA\Response(
      *          response=200,
@@ -96,9 +107,10 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/{id_user}/user",
+     *      path="/api/v1/{id_user}",
      *      operationId="getUser",
      *      tags={"Users"},
+     *      security={ {"sanctum": {} }},
      *      summary="Get user with partial user data",
      *      description="Get with partial user data",
      *      @OA\Parameter(
@@ -131,9 +143,10 @@ class UserController extends Controller
 
     /**
      * @OA\Patch(
-     *      path="/api/v1/{id_user}/user",
+     *      path="/api/v1/{id_user}",
      *      operationId="patchUser",
      *      tags={"Users"},
+     *      security={ {"sanctum": {} }},
      *      summary="Patch user with partial user data",
      *      description="Patch with partial user data",
      *      @OA\Parameter(
@@ -177,10 +190,11 @@ class UserController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/v1/{id_user}/user",
+     *      path="/api/v1/{id_user}",
      *      operationId="deleteUser",
      *      tags={"Users"},
      *      summary="Delete user",
+     *      security={ {"sanctum": {} }},
      *      description="Permanently delete user",
      *      @OA\Parameter(
      *         name="id_user",
@@ -199,7 +213,7 @@ class UserController extends Controller
      *              example=true,
      *            ),
      *          )
-     *      )
+     *      ),
      * )
      */
     public function destroy(string $id)

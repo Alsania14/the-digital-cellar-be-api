@@ -7,7 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * @OA\Info(title="The Digital Cellar API", version="1")
+ * @OA\Info(title="The Digital Cellar BE API", version="1")
  */
 class Controller extends BaseController
 {
