@@ -317,6 +317,45 @@
                     }
                 ]
             }
+        },
+        "/api/v1/users/user-summary": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user summary",
+                "description": "Get summary",
+                "operationId": "getUserSummary",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user_total": {
+                                            "type": "number",
+                                            "example": 10,
+                                            "nullable": "false"
+                                        },
+                                        "user_total_today": {
+                                            "type": "number",
+                                            "example": 1,
+                                            "nullable": "false"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {

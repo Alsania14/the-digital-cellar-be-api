@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -214,5 +215,43 @@ class UserController extends Controller
     {
         $isSuccess = User::findOrFail($id)->delete();
         return $isSuccess === 1;
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/v1/users/user-summary",
+     *      operationId="getUserSummary",
+     *      tags={"Users"},
+     *      security={ {"sanctum": {} }},
+     *      summary="Get user summary",
+     *      description="Get summary",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *            @OA\Property(
+     *              property="user_total",
+     *              type="number",
+     *              nullable="false",
+     *              example=10,
+     *            ),
+     *          @OA\Property(
+     *              property="user_total_today",
+     *              type="number",
+     *              nullable="false",
+     *              example=1,
+     *            ),
+     *          )
+     *      ),
+     * )
+     */
+    public function summary()
+    {
+        $userTotal = User::count();
+        $userToday = User::whereDate('created_at', Carbon::today())->count();
+        return [
+            'user_total' => $userTotal,
+            'user_total_today' => $userToday
+        ];
     }
 }
