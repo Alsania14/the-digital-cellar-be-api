@@ -247,8 +247,8 @@ class UserController extends Controller
      */
     public function summary()
     {
-        $userTotal = User::count();
-        $userToday = User::whereDate('created_at', Carbon::today())->count();
+        $userTotal = User::where('id', '!=', Auth::user()->id)->count();
+        $userToday = User::where('id', '!=', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
         return [
             'user_total' => $userTotal,
             'user_total_today' => $userToday
