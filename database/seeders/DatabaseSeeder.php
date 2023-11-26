@@ -12,13 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-     try {
-        \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-        ]);
-     } catch (\Throwable $th) {
-        echo ">> User already exists.\n\n";
-     }
+        try {
+            \App\Models\User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+            ]);
+        } catch (\Throwable $th) {
+            echo ">> User already exists.\n\n";
+        }
     }
 }

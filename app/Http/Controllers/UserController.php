@@ -50,11 +50,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userQuery = User::query()->where('id', '!=', Auth::user()->id);
+        $userQuery = User::query();
         if ($request?->input('search') != null) {
             $userQuery->orWhere('name', 'like', '%' . $request?->input('search') . '%');
             $userQuery->orWhere('email', 'like', '%' . $request?->input('search') . '%');
         }
+        $userQuery->where('id', '!=', Auth::user()->id);
         return new UserCollection($userQuery->simplePaginate($request?->input('per_page') ?? 10));
     }
 
