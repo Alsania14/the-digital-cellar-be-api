@@ -172,7 +172,7 @@
                 ]
             }
         },
-        "/api/v1/{id_user}": {
+        "/api/v1/{id_user}/user": {
             "get": {
                 "tags": [
                     "Users"

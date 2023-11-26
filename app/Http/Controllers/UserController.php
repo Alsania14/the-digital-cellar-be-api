@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userQuery = User::query();
+        $userQuery = User::query()->where('id', '!=', Auth::user()->id);
         if ($request?->input('search') != null) {
             $userQuery->orWhere('name', 'like', '%' . $request?->input('search') . '%');
             $userQuery->orWhere('email', 'like', '%' . $request?->input('search') . '%');
@@ -100,7 +100,7 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/{id_user}",
+     *      path="/api/v1/{id_user}/user",
      *      operationId="getUser",
      *      tags={"Users"},
      *      security={ {"sanctum": {} }},
@@ -136,7 +136,7 @@ class UserController extends Controller
 
     /**
      * @OA\Patch(
-     *      path="/api/v1/{id_user}",
+     *      path="/api/v1/{id_user}/user",
      *      operationId="patchUser",
      *      tags={"Users"},
      *      security={ {"sanctum": {} }},
@@ -183,7 +183,7 @@ class UserController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/v1/{id_user}",
+     *      path="/api/v1/{id_user}/user",
      *      operationId="deleteUser",
      *      tags={"Users"},
      *      summary="Delete user",

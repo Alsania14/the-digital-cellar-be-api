@@ -21,10 +21,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('auth/sign-out', [\App\Http\Controllers\AuthController::class, 'signOut']);
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [\App\Http\Controllers\UserController::class, 'index']);
-            Route::get('/{id_user}', [\App\Http\Controllers\UserController::class, 'show']);
+            Route::get('/{id_user}/user', [\App\Http\Controllers\UserController::class, 'show']);
             Route::post('/', [\App\Http\Controllers\UserController::class, 'store']);
-            Route::patch('/{id_user}', [\App\Http\Controllers\UserController::class, 'update']);
-            Route::delete('/{id_user}', [\App\Http\Controllers\UserController::class, 'destroy']);
+            Route::patch('/{id_user}/user', [\App\Http\Controllers\UserController::class, 'update']);
+            Route::delete('/{id_user}/user', [\App\Http\Controllers\UserController::class, 'destroy']);
         });
     });
 });
