@@ -22,8 +22,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|unique:users,name,' . $this->user()->id,
+            'email' => 'required|unique:users,email,' . $this->user()->id,
             'password' => 'required',
         ];
     }

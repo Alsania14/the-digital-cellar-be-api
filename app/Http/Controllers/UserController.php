@@ -56,7 +56,7 @@ class UserController extends Controller
             $userQuery->orWhere('email', 'like', '%' . $request?->input('search') . '%');
         }
         $userQuery->where('id', '!=', Auth::user()->id);
-        return new UserCollection($userQuery->simplePaginate($request?->input('per_page') ?? 10));
+        return new UserCollection($userQuery->paginate($request?->input('per_page') ?? 10));
     }
 
     /**
